@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@drawable/footer_bg"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/tab1"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/tab1_img"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="#000000"
+            android:clickable="false"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="tab1"
+            android:textColor="#eeeeee" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/tab2"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/tab2_img"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="#000000"
+            android:clickable="false"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="tab2"
+            android:textColor="#eeeeee" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/tab3"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/tab3_img"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="#000000"
+            android:clickable="false"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="tab3"
+            android:textColor="#eeeeee" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/tab4"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/tab4_img"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="#000000"
+            android:clickable="false"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="tab4"
+            android:textColor="#eeeeee" />
+    </LinearLayout>
+</LinearLayout>
