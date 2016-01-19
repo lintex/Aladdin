@@ -10,22 +10,23 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/tab1_img"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="#000000"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
             android:clickable="false"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/img2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="tab1"
-            android:textColor="#eeeeee" />
+            android:textColor="#999999" />
     </LinearLayout>
 
 
@@ -34,22 +35,23 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/tab2_img"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="#000000"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
             android:clickable="false"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/img3" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="tab2"
-            android:textColor="#eeeeee" />
+            android:textColor="#999999" />
     </LinearLayout>
 
 
@@ -58,22 +60,23 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/tab3_img"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="#000000"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
             android:clickable="false"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/img5" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="tab3"
-            android:textColor="#eeeeee" />
+            android:textColor="#999999" />
     </LinearLayout>
 
 
@@ -82,21 +85,22 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/tab4_img"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="#000000"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
             android:clickable="false"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/img7" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:text="tab4"
-            android:textColor="#eeeeee" />
+            android:textColor="#999999" />
     </LinearLayout>
 </LinearLayout>
