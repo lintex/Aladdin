@@ -1,14 +1,10 @@
 package com.ixxj.aladdin;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -21,7 +17,6 @@ import java.util.List;
 public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
     private ViewPager mViewPager;
-    private FragmentPagerAdapter mAdapter;
     private List<Fragment> mFragments;
 
     private LinearLayout mTab1;
@@ -64,7 +59,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTab3_img = (ImageButton) findViewById(R.id.tab3_img);
         mTab4_img = (ImageButton) findViewById(R.id.tab4_img);
 
-        mFragments = new ArrayList<Fragment>();
+        mFragments = new ArrayList<>();
         Fragment mTab01 = new Fragment1();
         Fragment mTab02 = new Fragment2();
         Fragment mTab03 = new Fragment3();
@@ -75,23 +70,25 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mFragments.add(mTab04);
 
 
-        mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+        FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
 
             @Override
             public int getCount() {
                 return mFragments.size();
             }
 
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
+                        @Override
+                        public Object instantiateItem(ViewGroup container, int position) {
 
-                ViewGroup parent = (ViewGroup) container.getParent();
-                if (parent != null) {
-                    parent.removeAllViews();
-                }
-                container.addView(container);
-                return super.instantiateItem(container, position);
-            }
+                         /*   ViewGroup parent = (ViewGroup) container.getParent();
+                            if (parent != null) {
+                                parent.removeAllViews();
+                            }
+                            container.addView(container);
+                            */
+                            return super.instantiateItem(container, position);
+
+                        }
 
             @Override
             public Fragment getItem(int arg0) {

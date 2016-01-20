@@ -42,9 +42,9 @@ public class Fragment2 extends Fragment implements ListView.OnItemClickListener,
         listView.setAdapter(simp_adapter);
         listView.setOnItemClickListener(this);
         listView.setOnScrollListener(this);
-        return listView;
+        return view;
     }
-
+/*
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -56,7 +56,7 @@ public class Fragment2 extends Fragment implements ListView.OnItemClickListener,
             }
         }
     }
-
+*/
     private List<Map<String, Object>> getData() {
         for (int i = 0; i < 20; i++) {
             Map<String, Object> map = new HashMap<String, Object>();
@@ -75,20 +75,24 @@ public class Fragment2 extends Fragment implements ListView.OnItemClickListener,
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        switch (scrollState){
+/*        switch (scrollState){
             case SCROLL_STATE_TOUCH_SCROLL:
                 break;
             case SCROLL_STATE_FLING:
                 break;
             case SCROLL_STATE_IDLE:
-                Map<String,Object> map = new HashMap<String,Object>();
-                map.put("pic",R.mipmap.ic_launcher);
-                map.put("text","阿拉丁丁");
-                dataList.add(map);
-                simp_adapter.notifyDataSetChanged();
                 break;
-
         }
+ */
+        if (scrollState == SCROLL_STATE_IDLE || scrollState == SCROLL_STATE_FLING)
+        {
+            Map<String,Object> map = new HashMap<String,Object>();
+            map.put("pic",R.mipmap.ic_launcher);
+            map.put("text","阿拉丁丁");
+            dataList.add(map);
+            simp_adapter.notifyDataSetChanged();
+        }
+
     }
 
     @Override
