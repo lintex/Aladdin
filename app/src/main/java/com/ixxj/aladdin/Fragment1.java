@@ -1,5 +1,6 @@
 package com.ixxj.aladdin;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,7 +29,7 @@ import java.util.List;
 /**
  * Created by lintex on 2016/1/13.
  */
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
 
     private ListView mListView;
     private static String URL = "http://www.imooc.com/api/teacher?type=4&num=30";
@@ -39,6 +41,7 @@ public class Fragment1 extends Fragment {
         view = inflater.inflate(R.layout.view1,container,false);
         mListView = (ListView) view.findViewById(R.id.listView_tab1);
         new NewsAsyncTask().execute(URL);
+        mListView.setOnItemClickListener(this);
         return view;
     }
 
@@ -88,6 +91,15 @@ public class Fragment1 extends Fragment {
         return result;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        //Intent intent= new Intent();
+        //intent.setClass(getActivity(),ContentActivity.class);
+        //getActivity().startActivity(intent);
+
+        Toast.makeText(view.getContext(), "点击了"+mListView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+    }
+
     class NewsAsyncTask extends AsyncTask<String, Void, List<NewsBean>> {
         @Override
         protected List<NewsBean> doInBackground(String... params) {
@@ -97,7 +109,7 @@ public class Fragment1 extends Fragment {
         @Override
         protected void onPostExecute(List<NewsBean> newsBeans) {
             super.onPostExecute(newsBeans);
-            NewsAdapter adapter = new NewsAdapter(getActivity(),newsBeans);
+            NewsAdapter adapter = new NewsAdapter(getActivity(),newsBeans,mListView);
             mListView.setAdapter(adapter);
         }
     }
