@@ -113,7 +113,7 @@ public class ImageLoader {
         Bitmap bitmap = getBitmapFromCache(url);
         //如果缓存中没有，从网络下载
         if (bitmap == null) {
-            imageView.setImageResource(R.mipmap.ic_launcher);
+            imageView.setImageResource(R.mipmap.normalbg);
         } else {
             imageView.setImageBitmap(bitmap);
         }

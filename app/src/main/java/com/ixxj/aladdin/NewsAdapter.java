@@ -65,7 +65,7 @@ public class NewsAdapter extends BaseAdapter implements AbsListView.OnScrollList
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.ivIcon.setImageResource(R.mipmap.ic_launcher);
+        viewHolder.ivIcon.setImageResource(R.mipmap.normalbg);
         String url = mList.get(position).newsIconUrl;
         viewHolder.ivIcon.setTag(url);
         // new ImageLoader().showImageByThread(viewHolder.ivIcon, url);

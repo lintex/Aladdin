@@ -93,11 +93,21 @@ public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //Intent intent= new Intent();
-        //intent.setClass(getActivity(),ContentActivity.class);
+        Intent intent= new Intent();
+        intent.setClass(getActivity(), ContentActivity.class);
+
+
+        NewsBean mItemNewsBean = (NewsBean) mListView.getItemAtPosition(position);
+        Bundle mItemBundle = new Bundle();
+        mItemBundle.putString("title", mItemNewsBean.newsTitle);
+        mItemBundle.putString("content", mItemNewsBean.newsContent);
+        intent.putExtras(mItemBundle);
+
         //getActivity().startActivity(intent);
 
-        Toast.makeText(view.getContext(), "点击了"+mListView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+        startActivityForResult(intent, 0);
+        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+        //Toast.makeText(view.getContext(), "点击了"+mListView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
     }
 
     class NewsAsyncTask extends AsyncTask<String, Void, List<NewsBean>> {
