@@ -30,9 +30,13 @@ public class LoadingActivity extends Activity {
             });
         }
         */
+    //页面任务：
+    // 1、在线更新显示图片
+    // 2、根据版本号，提示软件更新
+
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getWindow().setFormat(PixelFormat.RGBA_8888);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
 
