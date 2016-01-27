@@ -32,7 +32,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        new common().openImmerseStatasBarMode(this);
         setContentView(R.layout.activity_main);
         initView();
         initEvents();

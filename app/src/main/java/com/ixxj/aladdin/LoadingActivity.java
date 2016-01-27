@@ -37,8 +37,9 @@ public class LoadingActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFormat(PixelFormat.RGBA_8888);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
+        //getWindow().setFormat(PixelFormat.RGBA_8888);
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
+        new common().openImmerseStatasBarMode(this);
 
         setContentView(R.layout.activity_loading);
 

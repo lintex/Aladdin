@@ -9,5 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/listView_tab1"
         android:layout_weight="1"
+        android:divider="#d8d8d8"
+        android:dividerHeight="1px"
         />
 </LinearLayout>
