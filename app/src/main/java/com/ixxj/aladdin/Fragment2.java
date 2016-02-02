@@ -44,19 +44,7 @@ public class Fragment2 extends Fragment implements ListView.OnItemClickListener,
         listView.setOnScrollListener(this);
         return view;
     }
-/*
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.i("tag","onDestroyView");
-        if (view != null) {
-            ViewGroup parentViewGroup = (ViewGroup) view.getParent();
-            if (parentViewGroup != null) {
-                parentViewGroup.removeAllViews();
-            }
-        }
-    }
-*/
+
     private List<Map<String, Object>> getData() {
         for (int i = 0; i < 20; i++) {
             Map<String, Object> map = new HashMap<String, Object>();

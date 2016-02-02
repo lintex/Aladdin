@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/item_pic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginLeft="5dp"
         android:src="@mipmap/normalbg" />
 
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:maxLines="1"
-            android:text="测试测试测试测试"
+            android:text="标题"
             android:textColor="#353535"
             android:textSize="15sp" />
 
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
-            android:text="测试测试测试测试测试"
+            android:text="简介"
             android:textColor="#999999"
             android:textSize="12sp" />
     </LinearLayout>

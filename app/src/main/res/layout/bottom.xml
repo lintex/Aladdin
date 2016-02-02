@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="tab1"
+            android:text="阿阿"
             android:textColor="#999999" />
     </LinearLayout>
 
@@ -50,7 +50,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="tab2"
+            android:text="拉拉"
             android:textColor="#999999" />
     </LinearLayout>
 
@@ -75,7 +75,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="tab3"
+            android:text="丁丁"
             android:textColor="#999999" />
     </LinearLayout>
 
@@ -100,7 +100,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="tab4"
+            android:text="我"
             android:textColor="#999999" />
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.ixxj.aladdin;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -24,6 +25,14 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
         new common().openImmerseStatasBarMode(this);
         setContentView(R.layout.activity_content);
 
+        //异步获取页面数据
+        AsyncTask task = new AsyncTask() {
+            @Override
+            protected Object doInBackground(Object[] params) {
+                return null;
+            }
+        };
+
         mGestureDetector = new GestureDetector((GestureDetector.OnGestureListener) this);
         LinearLayout viewSnsLayout = (LinearLayout) findViewById(R.id.id_content);
         viewSnsLayout.setOnTouchListener(this);
@@ -31,9 +40,11 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
 
         TextView textView = (TextView) findViewById(R.id.textView);
         TextView textView2 = (TextView) findViewById(R.id.textView2);
+        TextView tv_title = (TextView) findViewById(R.id.id_item_title);
         Bundle bundle = this.getIntent().getExtras();
 
         textView.setText(bundle.getString("title"));
+        tv_title.setText(bundle.getString("title"));
         textView2.setText(bundle.getString("content"));
         btn_back = (ImageButton) findViewById(R.id.id_item_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
