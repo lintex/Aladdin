@@ -59,6 +59,7 @@ public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
                 for(int i=0;i<jsonArray.length();i++){
                     jsonObject = jsonArray.getJSONObject(i);
                     newsBean = new NewsBean();
+                    newsBean.newsId=jsonObject.getString("id");
                     newsBean.newsIconUrl=jsonObject.getString("picSmall");
                     newsBean.newsTitle=jsonObject.getString("name");
                     newsBean.newsContent=jsonObject.getString("description");
@@ -102,6 +103,7 @@ public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
         Bundle mItemBundle = new Bundle();
         mItemBundle.putString("title", mItemNewsBean.newsTitle);
         mItemBundle.putString("content", mItemNewsBean.newsContent);
+        mItemBundle.putString("id", mItemNewsBean.newsId);
         intent.putExtras(mItemBundle);
 
         //getActivity().startActivity(intent);

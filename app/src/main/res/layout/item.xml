@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/item_pic"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="5dp"
         android:src="@mipmap/normalbg" />
 
@@ -32,7 +32,6 @@
             android:id="@+id/item_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="2"
             android:text="简介"
             android:textColor="#999999"
             android:textSize="12sp" />

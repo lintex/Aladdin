@@ -7,6 +7,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView1"
+        android:divider="#d8d8d8"
+        android:dividerHeight="1px"
         android:layout_gravity="center_vertical"
         android:layout_weight="1" />
 </LinearLayout>

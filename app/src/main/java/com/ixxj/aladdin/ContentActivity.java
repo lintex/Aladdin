@@ -1,23 +1,46 @@
 package com.ixxj.aladdin;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ContentActivity extends Activity implements View.OnTouchListener, GestureDetector.OnGestureListener {
     private ImageButton btn_back;
     GestureDetector mGestureDetector;
-    private int verticalMinDistance = 20;
+    private int verticalMinDistance = 50;
     private int minVelocity = 0;
+
+    private String mURL = "http://ixxj.sinaapp.com/json_content.php";
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +48,21 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
         new common().openImmerseStatasBarMode(this);
         setContentView(R.layout.activity_content);
 
-        //异步获取页面数据
-        AsyncTask task = new AsyncTask() {
-            @Override
-            protected Object doInBackground(Object[] params) {
-                return null;
-            }
-        };
 
         mGestureDetector = new GestureDetector((GestureDetector.OnGestureListener) this);
         LinearLayout viewSnsLayout = (LinearLayout) findViewById(R.id.id_content);
         viewSnsLayout.setOnTouchListener(this);
         viewSnsLayout.setLongClickable(true);
 
-        TextView textView = (TextView) findViewById(R.id.textView);
         TextView textView2 = (TextView) findViewById(R.id.textView2);
         TextView tv_title = (TextView) findViewById(R.id.id_item_title);
         Bundle bundle = this.getIntent().getExtras();
-
-        textView.setText(bundle.getString("title"));
         tv_title.setText(bundle.getString("title"));
         textView2.setText(bundle.getString("content"));
+        mURL=mURL+"?id="+bundle.getString("id");
+        mListView = (ListView) findViewById(R.id.content_listView);
+        new NewsAsyncTask().execute(mURL);
+
         btn_back = (ImageButton) findViewById(R.id.id_item_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +71,9 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
             }
         });
     }
+
+
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
@@ -108,5 +128,70 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
+    }
+
+
+
+
+    private List<NewsBean> getJsonData(String url) {
+        List<NewsBean> newsBeanList = new ArrayList<>();
+        try {
+            String jsonString = readStream(new URL(url).openStream());
+            //Log.i("yxx", jsonString);
+            JSONObject jsonObject;
+            NewsBean newsBean;
+            try{
+                jsonObject =new JSONObject(jsonString);
+                JSONArray jsonArray = jsonObject.getJSONArray("data");
+                for(int i=0;i<jsonArray.length();i++){
+                    jsonObject = jsonArray.getJSONObject(i);
+                    newsBean = new NewsBean();
+                    newsBean.newsIconUrl="http://img.mukewang.com/55249cf30001ae8a06000338-300-170.jpg";
+                    newsBean.newsTitle=jsonObject.getString("author");
+                    newsBean.newsContent=jsonObject.getString("content");
+                    newsBeanList.add(newsBean);
+                    //Log.i("yxx", jsonObject.getString("author"));
+                }
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return newsBeanList;
+    }
+
+    private String readStream(InputStream is) {
+        InputStreamReader isr;
+        String result = "";
+        try {
+            String line = "";
+            isr = new InputStreamReader(is, "utf-8");
+            BufferedReader br = new BufferedReader(isr);
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    class NewsAsyncTask extends AsyncTask<String, Void, List<NewsBean>> {
+        @Override
+        protected List<NewsBean> doInBackground(String... params) {
+            return getJsonData(params[0]);
+        }
+
+        @Override
+        protected void onPostExecute(List<NewsBean> newsBeans) {
+            super.onPostExecute(newsBeans);
+            NewsAdapter adapter = new NewsAdapter(ContentActivity.this,newsBeans,mListView);
+            mListView.setAdapter(adapter);
+        }
     }
 }
