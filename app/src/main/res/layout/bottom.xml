@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="55dp"
     android:background="@drawable/footer_bg"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    >
 
     <LinearLayout
         android:id="@+id/tab1"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -23,10 +25,12 @@
             android:src="@mipmap/img2" />
 
         <TextView
+            android:id="@+id/tab1_text"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="阿阿"
-            android:textColor="#999999" />
+            android:layout_height="18dp"
+            android:textSize="12sp"
+            android:text="吐槽"
+            android:textColor="#46C01C" />
     </LinearLayout>
 
 
@@ -35,7 +39,7 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -48,9 +52,11 @@
             android:src="@mipmap/img3" />
 
         <TextView
+            android:id="@+id/tab2_text"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="拉拉"
+            android:layout_height="18dp"
+            android:textSize="12sp"
+            android:text="朋友"
             android:textColor="#999999" />
     </LinearLayout>
 
@@ -60,7 +66,7 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -73,9 +79,11 @@
             android:src="@mipmap/img5" />
 
         <TextView
+            android:id="@+id/tab3_text"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:text="丁丁"
+            android:layout_height="18dp"
+            android:textSize="12sp"
+            android:text="附近"
             android:textColor="#999999" />
     </LinearLayout>
 
@@ -85,7 +93,7 @@
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -98,8 +106,10 @@
             android:src="@mipmap/img7" />
 
         <TextView
+            android:id="@+id/tab4_text"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="18dp"
+            android:textSize="12sp"
             android:text="我"
             android:textColor="#999999" />
     </LinearLayout>

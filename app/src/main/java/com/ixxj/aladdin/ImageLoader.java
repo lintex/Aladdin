@@ -129,7 +129,7 @@ public class ImageLoader {
     }
 
     public void loadImages(int start, int end) {
-        for (int i = start; i < end; i++) {
+        for (int i = start; i < end-1; i++) {
             String url = NewsAdapter.URLS[i];
             //从缓存中取出对应的图片
             Bitmap bitmap = getBitmapFromCache(url);

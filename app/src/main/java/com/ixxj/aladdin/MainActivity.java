@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private ImageButton mTab2_img;
     private ImageButton mTab3_img;
     private ImageButton mTab4_img;
+
+    private TextView mTab1_text;
+    private TextView mTab2_text;
+    private TextView mTab3_text;
+    private TextView mTab4_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.id_viewpager);
+        mViewPager.setOffscreenPageLimit(3);//防止页面被销毁
 
         mTab1 = (LinearLayout) findViewById(R.id.tab1);
         mTab2 = (LinearLayout) findViewById(R.id.tab2);
@@ -60,6 +67,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTab2_img = (ImageButton) findViewById(R.id.tab2_img);
         mTab3_img = (ImageButton) findViewById(R.id.tab3_img);
         mTab4_img = (ImageButton) findViewById(R.id.tab4_img);
+
+        mTab1_text = (TextView) findViewById(R.id.tab1_text);
+        mTab2_text = (TextView) findViewById(R.id.tab2_text);
+        mTab3_text = (TextView) findViewById(R.id.tab3_text);
+        mTab4_text = (TextView) findViewById(R.id.tab4_text);
 
         mFragments = new ArrayList<>();
         Fragment mTab01 = new Fragment1();
@@ -128,15 +140,19 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         {
             case 0:
                 mTab1_img.setImageResource(R.mipmap.img2);
+                mTab1_text.setTextColor(0xff46C01C);
                 break;
             case 1:
                 mTab2_img.setImageResource(R.mipmap.img4);
+                mTab2_text.setTextColor(0xff46C01C);
                 break;
             case 2:
                 mTab3_img.setImageResource(R.mipmap.img6);
+                mTab3_text.setTextColor(0xff46C01C);
                 break;
             case 3:
                 mTab4_img.setImageResource(R.mipmap.img8);
+                mTab4_text.setTextColor(0xff46C01C);
                 break;
         }
     }
@@ -167,6 +183,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTab2_img.setImageResource(R.mipmap.img3);
         mTab3_img.setImageResource(R.mipmap.img5);
         mTab4_img.setImageResource(R.mipmap.img7);
+        mTab1_text.setTextColor(0xff999999);
+        mTab2_text.setTextColor(0xff999999);
+        mTab3_text.setTextColor(0xff999999);
+        mTab4_text.setTextColor(0xff999999);
     }
 
 }

@@ -3,6 +3,7 @@ package com.ixxj.aladdin;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,18 +30,19 @@ import java.util.List;
 /**
  * Created by lintex on 2016/1/13.
  */
-public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
+public class Fragment1 extends Fragment implements ListView.OnItemClickListener,LoadListView.ILoadListener{
 
-    private ListView mListView;
-    //private static String URL = "http://www.imooc.com/api/teacher?type=4&num=30";
-    private static String URL = "http://ixxj.sinaapp.com/json.php";
+    private LoadListView mListView;
+    private static String URL = "http://www.imooc.com/api/teacher?type=4&num=30";
+    //private static String URL = "http://ixxj.sinaapp.com/json.php";
     private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.view1,container,false);
-        mListView = (ListView) view.findViewById(R.id.listView_tab1);
+        mListView = (LoadListView) view.findViewById(R.id.listView_tab1);
+        mListView.setInterface(this);
         new NewsAsyncTask().execute(URL);
         mListView.setOnItemClickListener(this);
         return view;
@@ -111,6 +113,23 @@ public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
         startActivityForResult(intent, 0);
         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         //Toast.makeText(view.getContext(), "点击了"+mListView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLoad() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                //获取更多数据
+                //new NewsAsyncTask().execute(URL);
+                //更新listview显示；
+                //adapter.notifyDataSetChanged();
+                //通知listview加载完毕
+                //mListView.loadComplete();
+            }
+        }, 2000);
     }
 
     class NewsAsyncTask extends AsyncTask<String, Void, List<NewsBean>> {

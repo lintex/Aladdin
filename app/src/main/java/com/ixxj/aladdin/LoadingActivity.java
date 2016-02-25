@@ -61,7 +61,7 @@ public class LoadingActivity extends Activity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
                 LoadingActivity.this.finish();
             }
-        }, 2900); //2900 for release
+        }, 1000); //2900 for release
 
 
     }
