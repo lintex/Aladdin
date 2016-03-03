@@ -3,6 +3,7 @@ package com.ixxj.aladdin;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,13 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +44,8 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
 
     private String mURL = "http://ixxj.sinaapp.com/json_content.php";
     private ListView mListView;
+    private String str;
+    private EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,7 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
         Bundle bundle = this.getIntent().getExtras();
         tv_title.setText(bundle.getString("title"));
         textView2.setText(bundle.getString("content"));
-        mURL=mURL+"?id="+bundle.getString("id");
+        mURL = mURL + "?id=" + bundle.getString("id");
         mListView = (ListView) findViewById(R.id.content_listView);
         new NewsAsyncTask().execute(mURL);
 
@@ -70,9 +75,36 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
                 ContentActivity.this.finish();
             }
         });
+
+        //提交数据到服数据库
+        editText = (EditText) findViewById(R.id.editText);
+        Button btn_send = (Button) findViewById(R.id.btn_send);
+
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = editText.getText().toString();
+
+                new MyThread().start();
+                editText.setText("");
+            }
+        });
+
     }
 
+    class MyThread extends Thread {
+        @Override
+        public void run() {
+                String urlStr = "http://ixxj.sinaapp.com/android_cc.php";
+                String params = "content="+str;
+            Log.i("yxx",params);
+                BasicHttpClient client = new BasicHttpClient();
+                String response = client.httpPost(urlStr,params);
+            Log.i("yxx",response);
+                //Toast.makeText(ContentActivity.this, "发送成功！", Toast.LENGTH_SHORT).show();
+        }
 
+    }
 
 
     @Override
@@ -81,6 +113,7 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
         // scroll.onTouchEvent(ev);
         return super.dispatchTouchEvent(ev);
     }
+
     @Override
     public boolean onDown(MotionEvent e) {
         return false;
@@ -131,8 +164,6 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
     }
 
 
-
-
     private List<NewsBean> getJsonData(String url) {
         List<NewsBean> newsBeanList = new ArrayList<>();
         try {
@@ -140,20 +171,19 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
             //Log.i("yxx", jsonString);
             JSONObject jsonObject;
             NewsBean newsBean;
-            try{
-                jsonObject =new JSONObject(jsonString);
+            try {
+                jsonObject = new JSONObject(jsonString);
                 JSONArray jsonArray = jsonObject.getJSONArray("data");
-                for(int i=0;i<jsonArray.length();i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
                     jsonObject = jsonArray.getJSONObject(i);
                     newsBean = new NewsBean();
-                    newsBean.newsIconUrl="http://img.mukewang.com/55249cf30001ae8a06000338-300-170.jpg";
-                    newsBean.newsTitle=jsonObject.getString("author");
-                    newsBean.newsContent=jsonObject.getString("content");
+                    newsBean.newsIconUrl = "http://img.mukewang.com/55249cf30001ae8a06000338-300-170.jpg";
+                    newsBean.newsTitle = jsonObject.getString("author");
+                    newsBean.newsContent = jsonObject.getString("content");
                     newsBeanList.add(newsBean);
                     //Log.i("yxx", jsonObject.getString("author"));
                 }
-            }
-            catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
         } catch (IOException e) {
@@ -190,7 +220,7 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
         @Override
         protected void onPostExecute(List<NewsBean> newsBeans) {
             super.onPostExecute(newsBeans);
-            NewsAdapter adapter = new NewsAdapter(ContentActivity.this,newsBeans,mListView);
+            NewsAdapter adapter = new NewsAdapter(ContentActivity.this, newsBeans, mListView);
             mListView.setAdapter(adapter);
         }
     }

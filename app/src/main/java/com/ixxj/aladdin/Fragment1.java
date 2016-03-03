@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,19 +31,39 @@ import java.util.List;
 /**
  * Created by lintex on 2016/1/13.
  */
-public class Fragment1 extends Fragment implements ListView.OnItemClickListener,LoadListView.ILoadListener{
+public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
 
-    private LoadListView mListView;
+    private ListView mListView;
     private static String URL = "http://www.imooc.com/api/teacher?type=4&num=30";
     //private static String URL = "http://ixxj.sinaapp.com/json.php";
     private View view;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.view1,container,false);
-        mListView = (LoadListView) view.findViewById(R.id.listView_tab1);
-        mListView.setInterface(this);
+        mListView = (ListView) view.findViewById(R.id.listView_tab1);
+
+
+        //下拉刷新ListView
+        swipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.swipe_container);
+        //设置刷新时动画的颜色，可以设置4个
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(view.getContext(), "正在刷新", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(view.getContext(), "刷新完成", Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }, 4000);
+            }
+        });
+
         new NewsAsyncTask().execute(URL);
         mListView.setOnItemClickListener(this);
         return view;
@@ -115,22 +136,6 @@ public class Fragment1 extends Fragment implements ListView.OnItemClickListener,
         //Toast.makeText(view.getContext(), "点击了"+mListView.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onLoad() {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                //获取更多数据
-                //new NewsAsyncTask().execute(URL);
-                //更新listview显示；
-                //adapter.notifyDataSetChanged();
-                //通知listview加载完毕
-                //mListView.loadComplete();
-            }
-        }, 2000);
-    }
 
     class NewsAsyncTask extends AsyncTask<String, Void, List<NewsBean>> {
         @Override
