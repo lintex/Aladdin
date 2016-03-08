@@ -1,5 +1,6 @@
 package com.ixxj.aladdin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,5 +52,15 @@ public class Fragment3 extends Fragment {
         });
 
         return view;
+    }
+
+    public void openWebView(View view){
+        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("url","http://baidu.com");
+        intent.putExtras(bundle);
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+
     }
 }

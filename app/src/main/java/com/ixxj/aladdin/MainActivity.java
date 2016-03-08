@@ -1,5 +1,6 @@
 package com.ixxj.aladdin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -188,5 +189,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTab3_text.setTextColor(0xff999999);
         mTab4_text.setTextColor(0xff999999);
     }
+
+
 
 }

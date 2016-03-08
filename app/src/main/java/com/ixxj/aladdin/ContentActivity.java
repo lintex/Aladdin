@@ -46,6 +46,8 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
     private ListView mListView;
     private String str;
     private EditText editText;
+    private Button btn_send;
+    private SendTask mSendTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,32 +80,64 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
 
         //提交数据到服数据库
         editText = (EditText) findViewById(R.id.editText);
-        Button btn_send = (Button) findViewById(R.id.btn_send);
+        btn_send = (Button) findViewById(R.id.btn_send);
 
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 str = editText.getText().toString();
-
-                new MyThread().start();
-                editText.setText("");
+                if (str == null || str.length() <= 0) {
+                    Toast.makeText(ContentActivity.this, "没有输入！", Toast.LENGTH_SHORT).show();
+                } else {
+                    mSendTask = new SendTask();
+                    mSendTask.execute("http://ixxj.sinaapp.com/android_cc.php", str);
+                }
             }
         });
 
     }
 
-    class MyThread extends Thread {
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //当activity退出时，将发表数据线程中止
+        if (mSendTask != null && mSendTask.getStatus() == AsyncTask.Status.RUNNING) {
+            //cancel方法只是将对应的aysncTask标记为cancel状态，并不是取消线程
+            mSendTask.cancel(true);
+        }
+    }
+
+    class SendTask extends AsyncTask<String, Void, String> {
         @Override
-        public void run() {
-                String urlStr = "http://ixxj.sinaapp.com/android_cc.php";
-                String params = "content="+str;
-            Log.i("yxx",params);
-                BasicHttpClient client = new BasicHttpClient();
-                String response = client.httpPost(urlStr,params);
-            Log.i("yxx",response);
-                //Toast.makeText(ContentActivity.this, "发送成功！", Toast.LENGTH_SHORT).show();
+        protected void onPreExecute() {
+            super.onPreExecute();
+            btn_send.setClickable(false);
         }
 
+        @Override
+        protected String doInBackground(String... params) {
+            if(isCancelled()){
+                return "线程已取消";
+            }
+            String Url = params[0];
+            String param = "content=" + params[1];
+            BasicHttpClient client = new BasicHttpClient();
+            String response = client.httpPost(Url, param);
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            //Log.i("yxx", "s=" + s);
+            if (s.equals("suc")) {
+                editText.setText("");
+                Toast.makeText(ContentActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ContentActivity.this, "提交失败！", Toast.LENGTH_SHORT).show();
+            }
+            btn_send.setClickable(true);
+        }
     }
 
 
