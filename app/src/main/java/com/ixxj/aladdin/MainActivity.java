@@ -92,8 +92,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 return mFragments.size();
             }
 
-                        @Override
-                        public Object instantiateItem(ViewGroup container, int position) {
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
 
                          /*   ViewGroup parent = (ViewGroup) container.getParent();
                             if (parent != null) {
@@ -101,9 +101,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             }
                             container.addView(container);
                             */
-                            return super.instantiateItem(container, position);
+                return super.instantiateItem(container, position);
 
-                        }
+            }
 
             @Override
             public Fragment getItem(int arg0) {
@@ -119,10 +119,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 int currentItem = mViewPager.getCurrentItem();
                 setTab(currentItem);
             }
+
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
                 // TODO Auto-generated method stub
             }
+
             @Override
             public void onPageScrollStateChanged(int arg0) {
                 // TODO Auto-generated method stub
@@ -134,11 +136,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setTab(i);
         mViewPager.setCurrentItem(i);
     }
-    private void setTab(int i)
-    {
+
+    private void setTab(int i) {
         resetImgs();
-        switch (i)
-        {
+        switch (i) {
             case 0:
                 mTab1_img.setImageResource(R.mipmap.img2);
                 mTab1_text.setTextColor(0xff46C01C);
@@ -157,10 +158,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
         }
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId())
-        {
+        switch (v.getId()) {
             case R.id.tab1:
                 setSelect(0);
                 break;
@@ -189,7 +190,5 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mTab3_text.setTextColor(0xff999999);
         mTab4_text.setTextColor(0xff999999);
     }
-
-
 
 }

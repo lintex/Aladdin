@@ -50,17 +50,34 @@ public class Fragment3 extends Fragment {
                 registerPage.show(getActivity());
             }
         });
+        Button btn_WebView = (Button) view.findViewById(R.id.btn_WebView);
+        btn_WebView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("url","http://baidu.com");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+            }
+        });
+
+
+        //启动登录界面
+        Button btn_login = (Button) view.findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+            }
+        });
+
 
         return view;
     }
 
-    public void openWebView(View view){
-        Intent intent = new Intent(getActivity(), WebViewActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("url","http://baidu.com");
-        intent.putExtras(bundle);
-        startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 
-    }
 }
