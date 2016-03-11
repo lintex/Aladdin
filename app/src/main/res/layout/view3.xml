@@ -24,5 +24,10 @@
         android:text="登录界面"
         android:id="@+id/btn_login"
         />
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GPS定位界面"
+        android:id="@+id/id_btn_GPS"
+        />
 </LinearLayout>

@@ -45,7 +45,8 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:imeOptions="actionSend"/>
 
         <Button
             android:id="@+id/btn_send"

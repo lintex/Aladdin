@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 repositories{
     flatDir{
@@ -29,4 +34,5 @@ dependencies {
     compile name:'SMSSDKGUI-2.0.1',ext:'aar'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.0.1'
+    compile files('libs/locSDK_6.22.jar')
 }

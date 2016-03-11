@@ -75,7 +75,16 @@ public class Fragment3 extends Fragment {
             }
         });
 
-
+        //启动GPS界面
+        Button btn_GPS = (Button) view.findViewById(R.id.id_btn_GPS);
+        btn_GPS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LocationActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
+            }
+        });
         return view;
     }
 

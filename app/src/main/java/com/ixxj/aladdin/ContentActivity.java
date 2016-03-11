@@ -39,7 +39,7 @@ import java.util.Map;
 public class ContentActivity extends Activity implements View.OnTouchListener, GestureDetector.OnGestureListener {
     private ImageButton btn_back;
     GestureDetector mGestureDetector;
-    private int verticalMinDistance = 50;
+    private int verticalMinDistance = 150;
     private int minVelocity = 0;
 
     private String mURL = "http://ixxj.sinaapp.com/json_content.php";

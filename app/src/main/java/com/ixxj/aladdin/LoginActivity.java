@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -56,8 +58,26 @@ public class LoginActivity extends Activity {
         phone = et_phone.getText().toString().trim();
         password = et_password.getText().toString().trim();
         //异步验证用户名密码
-        mLoginTask = new LoginTask();
-        mLoginTask.execute("http://1.ixxj.applinzi.com/android_login.php", phone, password);
+        if (phone == null || phone.length() <= 0 ) {
+            Toast toast = Toast.makeText(LoginActivity.this, "手机号码不能为空", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            et_phone.requestFocus();
+        }else if(password == null || password.length() <= 0) {
+            Toast toast = Toast.makeText(LoginActivity.this, "密码不能为空", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            et_password.requestFocus();
+        }else if(!Pattern.compile("1\\d{10}").matcher(phone).matches()){
+            Toast toast = Toast.makeText(LoginActivity.this, "手机号码格式不正确", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            et_password.requestFocus();
+            et_phone.requestFocus();
+        }else{
+            mLoginTask = new LoginTask();
+            mLoginTask.execute("http://1.ixxj.applinzi.com/android_login.php", phone, password);
+        }
     }
 
     public void register(View v) {
@@ -89,12 +109,13 @@ public class LoginActivity extends Activity {
         @Override
         protected String doInBackground(String... params) {
             String Url = params[0];
-            String param = "username=" + params[1] + "&password=" +params[2];
-            Log.i("yxx",param);
+            String param = "username=" + params[1] + "&password=" + params[2];
+            Log.i("yxx", param);
             BasicHttpClient client = new BasicHttpClient();
             String response = client.httpPost(Url, param);
             return response;
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -103,7 +124,7 @@ public class LoginActivity extends Activity {
                 JSONObject jsonObject = new JSONObject(s);
                 Integer code = jsonObject.getInt("code");
                 String message = jsonObject.getString("message");
-                if(code==200){
+                if (code == 200) {
                     jsonObject = jsonObject.getJSONObject("data");
                     editor.putString("username", jsonObject.getString("username"));
                     editor.putString("phone", jsonObject.getString("phone"));
@@ -113,7 +134,9 @@ public class LoginActivity extends Activity {
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
                     LoginActivity.this.finish();
                 }
-                Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                Toast toast = Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
