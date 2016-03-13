@@ -32,11 +32,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:hint="密码"
         android:imeOptions="actionDone"
-        />
+        android:layout_toLeftOf="@+id/id_btn_register"
+        android:layout_toStartOf="@+id/id_btn_register" />
 
     <Button
         android:layout_width="wrap_content"
@@ -77,4 +76,15 @@
         android:layout_alignParentEnd="true"
         android:onClick="register"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="显示密码"
+        android:id="@+id/id_btn_showPassword"
+        android:onClick="showPassword"
+        android:layout_alignTop="@+id/id_et_password"
+        android:layout_alignLeft="@+id/id_btn_register"
+        android:layout_alignStart="@+id/id_btn_register"
+        android:layout_alignBottom="@+id/id_et_password" />
 </RelativeLayout>

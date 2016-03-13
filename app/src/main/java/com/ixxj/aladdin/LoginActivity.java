@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -24,12 +26,13 @@ import cn.smssdk.gui.RegisterPage;
 
 public class LoginActivity extends Activity {
     private EditText et_phone, et_password;
-    private Button btn_login, btn_forgotPassword, btn_register;
+    private Button btn_login, btn_forgotPassword, btn_register,btn_showPassword;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     private String phone;
     private String password;
     private LoginTask mLoginTask;
+    private Boolean showPassword = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class LoginActivity extends Activity {
         btn_login = (Button) findViewById(R.id.id_btn_login);
         btn_register = (Button) findViewById(R.id.id_btn_register);
         btn_forgotPassword = (Button) findViewById(R.id.id_btn_forgotPassword);
+        btn_showPassword = (Button) findViewById(R.id.id_btn_showPassword);
         //初始化短信验证界面
         SMSSDK.initSDK(this, "f3824f847d66", "1d05e3fa2b5a021b66350644965e462c");
     }
@@ -58,23 +62,27 @@ public class LoginActivity extends Activity {
         phone = et_phone.getText().toString().trim();
         password = et_password.getText().toString().trim();
         //异步验证用户名密码
-        if (phone == null || phone.length() <= 0 ) {
+        if (phone == null || phone.length() <= 0) {
             Toast toast = Toast.makeText(LoginActivity.this, "手机号码不能为空", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             et_phone.requestFocus();
-        }else if(password == null || password.length() <= 0) {
+        } else if (password == null || password.length() <= 0) {
             Toast toast = Toast.makeText(LoginActivity.this, "密码不能为空", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             et_password.requestFocus();
-        }else if(!Pattern.compile("1\\d{10}").matcher(phone).matches()){
+        } else if (!Pattern.compile("1\\d{10}").matcher(phone).matches()) {
             Toast toast = Toast.makeText(LoginActivity.this, "手机号码格式不正确", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-            et_password.requestFocus();
             et_phone.requestFocus();
-        }else{
+        } else if (password != null && password.length() < 8) {
+            Toast toast = Toast.makeText(LoginActivity.this, "密码不能小于8位", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            et_password.requestFocus();}
+        else {
             mLoginTask = new LoginTask();
             mLoginTask.execute("http://1.ixxj.applinzi.com/android_login.php", phone, password);
         }
@@ -104,6 +112,19 @@ public class LoginActivity extends Activity {
 
     }
 
+    public void showPassword(View v) {
+        if(showPassword){//显示密码
+            showPassword = !showPassword;
+            btn_showPassword.setText("隐藏密码");
+            et_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            et_password.setSelection(et_password.getText().toString().length());
+        }else{//隐藏密码
+            showPassword = !showPassword;
+            btn_showPassword.setText("显示密码");
+            et_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            et_password.setSelection(et_password.getText().toString().length());
+        }
+    }
 
     class LoginTask extends AsyncTask<String, Void, String> {
         @Override
