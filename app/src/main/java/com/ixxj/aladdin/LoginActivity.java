@@ -63,24 +63,16 @@ public class LoginActivity extends Activity {
         password = et_password.getText().toString().trim();
         //异步验证用户名密码
         if (phone == null || phone.length() <= 0) {
-            Toast toast = Toast.makeText(LoginActivity.this, "手机号码不能为空", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            NewToast.showMessage(LoginActivity.this, "手机号码不能为空");
             et_phone.requestFocus();
         } else if (password == null || password.length() <= 0) {
-            Toast toast = Toast.makeText(LoginActivity.this, "密码不能为空", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            NewToast.showMessage(LoginActivity.this, "密码不能为空");
             et_password.requestFocus();
         } else if (!Pattern.compile("1\\d{10}").matcher(phone).matches()) {
-            Toast toast = Toast.makeText(LoginActivity.this, "手机号码格式不正确", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            NewToast.showMessage(LoginActivity.this, "手机号码格式不正确");
             et_phone.requestFocus();
         } else if (password != null && password.length() < 8) {
-            Toast toast = Toast.makeText(LoginActivity.this, "密码不能小于8位", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            NewToast.showMessage(LoginActivity.this, "密码不能小于8位");
             et_password.requestFocus();}
         else {
             mLoginTask = new LoginTask();
