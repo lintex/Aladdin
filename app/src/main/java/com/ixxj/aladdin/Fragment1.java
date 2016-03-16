@@ -34,8 +34,8 @@ import java.util.List;
 public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
 
     private ListView mListView;
-    private static String URL = "http://www.imooc.com/api/teacher?type=4&num=30";
-    //private static String URL = "http://ixxj.sinaapp.com/json.php";
+    //private static String URL = "http://www.imooc.com/api/teacher?type=4&num=30";
+    private static String URL = "http://ixxj.sinaapp.com/json.php";
     private View view;
     private SwipeRefreshLayout swipeRefreshLayout;
 

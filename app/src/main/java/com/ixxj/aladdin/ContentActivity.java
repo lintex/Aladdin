@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -48,6 +49,7 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
     private EditText editText;
     private Button btn_send;
     private SendTask mSendTask;
+    private String id;//分类id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,8 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
         Bundle bundle = this.getIntent().getExtras();
         tv_title.setText(bundle.getString("title"));
         textView2.setText(bundle.getString("content"));
-        mURL = mURL + "?id=" + bundle.getString("id");
+        id = bundle.getString("id");
+        mURL = mURL + "?id=" + id;
         mListView = (ListView) findViewById(R.id.content_listView);
         new NewsAsyncTask().execute(mURL);
 
@@ -90,11 +93,10 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
                     Toast.makeText(ContentActivity.this, "没有输入！", Toast.LENGTH_SHORT).show();
                 } else {
                     mSendTask = new SendTask();
-                    mSendTask.execute("http://ixxj.sinaapp.com/android_cc.php", str);
+                    mSendTask.execute("http://ixxj.sinaapp.com/android_cc.php", str, id);
                 }
             }
         });
-
     }
 
     @Override
@@ -116,11 +118,12 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
 
         @Override
         protected String doInBackground(String... params) {
-            if(isCancelled()){
-                return "线程已取消";
+            if (isCancelled()) {
+                return "{\"code\":202,\"message\":\"线程取消\",\"data\":null}";
             }
             String Url = params[0];
-            String param = "content=" + params[1];
+            String param = "content=" + params[1] + "&id=" + params[2];
+            Log.i("yxx", param);
             BasicHttpClient client = new BasicHttpClient();
             String response = client.httpPost(Url, param);
             return response;
@@ -129,14 +132,22 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            //Log.i("yxx", "s=" + s);
-            if (s.equals("suc")) {
-                editText.setText("");
-                Toast.makeText(ContentActivity.this, "提交成功！", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(ContentActivity.this, "提交失败！", Toast.LENGTH_SHORT).show();
+            Log.i("yxx", s);
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                Integer code = jsonObject.getInt("code");
+                String message = jsonObject.getString("message");
+                if (code == 200) {
+                    editText.setText("");
+                }else{
+                    editText.setText(str);
+                }
+                NewToast.showMessage(ContentActivity.this, message);
+                btn_send.setClickable(true);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            btn_send.setClickable(true);
+
         }
     }
 

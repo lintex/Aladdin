@@ -101,6 +101,8 @@ public class LocationActivity extends Activity {
             sb.append(location.getLongitude());
             sb.append("\nradius : ");
             sb.append(location.getRadius());
+            sb.append("\nGeoHash : ");
+            sb.append(new GeoHash().encode(location.getLatitude(),location.getLongitude()));
             if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
                 sb.append("\nspeed : ");
                 sb.append(location.getSpeed());// 单位：公里每小时
