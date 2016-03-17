@@ -1,4 +1,4 @@
-package com.ixxj.aladdin;
+package com.ixxj.aladdin.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -17,6 +17,8 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.BDNotifyListener;//假如用到位置提醒功能，需要import该类
 import com.baidu.location.Poi;
+import com.ixxj.aladdin.GeoHash;
+import com.ixxj.aladdin.R;
 
 import java.util.ArrayList;
 import java.util.List;

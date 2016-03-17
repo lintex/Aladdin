@@ -1,4 +1,4 @@
-package com.ixxj.aladdin;
+package com.ixxj.aladdin.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.Poi;
+import com.ixxj.aladdin.AladdinApplication;
+import com.ixxj.aladdin.GeoHash;
+import com.ixxj.aladdin.R;
 import com.ixxj.aladdin.service.LocationService;
 
 

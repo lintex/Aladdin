@@ -1,4 +1,4 @@
-package com.ixxj.aladdin;
+package com.ixxj.aladdin.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -13,7 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONArray;
+import com.ixxj.aladdin.BasicHttpClient;
+import com.ixxj.aladdin.NewToast;
+import com.ixxj.aladdin.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

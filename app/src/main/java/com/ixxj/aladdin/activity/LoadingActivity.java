@@ -1,14 +1,15 @@
-package com.ixxj.aladdin;
+package com.ixxj.aladdin.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.ixxj.aladdin.R;
+import com.ixxj.aladdin.common;
 
 public class LoadingActivity extends Activity {
 

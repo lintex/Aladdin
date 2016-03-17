@@ -1,4 +1,4 @@
-package com.ixxj.aladdin;
+package com.ixxj.aladdin.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,13 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ixxj.aladdin.Fragment1;
+import com.ixxj.aladdin.Fragment2;
+import com.ixxj.aladdin.Fragment3;
+import com.ixxj.aladdin.Fragment4;
+import com.ixxj.aladdin.R;
+import com.ixxj.aladdin.common;
 
 import java.util.ArrayList;
 import java.util.List;

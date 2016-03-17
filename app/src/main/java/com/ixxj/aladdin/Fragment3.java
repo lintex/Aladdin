@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.ixxj.aladdin.activity.LocationActivity;
+import com.ixxj.aladdin.activity.LocationActivity2;
+import com.ixxj.aladdin.activity.LoginActivity;
+import com.ixxj.aladdin.activity.WebViewActivity;
+
 import java.util.HashMap;
 
 import cn.smssdk.EventHandler;

@@ -42,7 +42,7 @@
             android:value="cH3fFKW6MUaBgQoHonV4I6CG" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ContentActivity2"
@@ -63,19 +63,19 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".WebViewActivity"
+            android:name=".activity.WebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".LocationActivity" />
+        <activity android:name=".activity.LocationActivity" />
 
         <service
             android:name=".service.LocationService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".LocationActivity2" />
+        <activity android:name=".activity.LocationActivity2" />
         <activity
             android:name=".activity.ContentActivity"
             android:screenOrientation="portrait"
