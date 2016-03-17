@@ -45,7 +45,7 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ContentActivity"
+            android:name=".activity.ContentActivity2"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
@@ -71,11 +71,16 @@
         <activity android:name=".LocationActivity" />
 
         <service
-            android:name="com.ixxj.aladdin.service.LocationService"
+            android:name=".service.LocationService"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".LocationActivity2"></activity>
+        <activity android:name=".LocationActivity2" />
+        <activity
+            android:name=".activity.ContentActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            />
     </application>
 
 </manifest>

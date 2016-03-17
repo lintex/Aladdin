@@ -15,6 +15,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ixxj.aladdin.activity.ContentActivity2;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -119,7 +121,7 @@ public class Fragment1 extends Fragment implements ListView.OnItemClickListener{
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent= new Intent();
-        intent.setClass(getActivity(), ContentActivity.class);
+        intent.setClass(getActivity(), ContentActivity2.class);
 
 
         NewsBean mItemNewsBean = (NewsBean) mListView.getItemAtPosition(position);

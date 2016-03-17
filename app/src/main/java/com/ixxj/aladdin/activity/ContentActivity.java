@@ -1,4 +1,4 @@
-package com.ixxj.aladdin;
+package com.ixxj.aladdin.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +21,13 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ixxj.aladdin.BasicHttpClient;
+import com.ixxj.aladdin.NewToast;
+import com.ixxj.aladdin.NewsAdapter;
+import com.ixxj.aladdin.NewsBean;
+import com.ixxj.aladdin.R;
+import com.ixxj.aladdin.common;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -139,7 +146,7 @@ public class ContentActivity extends Activity implements View.OnTouchListener, G
                 String message = jsonObject.getString("message");
                 if (code == 200) {
                     editText.setText("");
-                }else{
+                } else {
                     editText.setText(str);
                 }
                 NewToast.showMessage(ContentActivity.this, message);
