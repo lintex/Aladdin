@@ -36,4 +36,11 @@
         android:text="GPS定位界面2"
         android:id="@+id/id_btn_GPS2"
         />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="刮刮卡"
+        android:id="@+id/id_btn_guaguaka"
+        />
 </LinearLayout>

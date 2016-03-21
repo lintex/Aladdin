@@ -1,16 +1,41 @@
-<com.jingchen.pulltorefresh.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refresh_view"
+<?xml version="1.0"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF">
+    android:background="#FFF"
+    android:orientation="vertical">
+    <include layout="@layout/item_top" />
 
-    <com.jingchen.pulltorefresh.PullableListView
+    <com.jingchen.pulltorefresh.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFF"
+        android:layout_weight="1"
+        >
 
-        android:divider="#AAA"
-        android:dividerHeight="1dp" />
+        <com.jingchen.pulltorefresh.PullableListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#AAA"
+            android:dividerHeight="1dp" />
 
-</com.jingchen.pulltorefresh.PullToRefreshLayout>
 
+    </com.jingchen.pulltorefresh.PullToRefreshLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提交"/>
+    </LinearLayout>
+</LinearLayout>

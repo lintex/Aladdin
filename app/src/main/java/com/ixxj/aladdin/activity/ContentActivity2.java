@@ -18,15 +18,16 @@ import com.ixxj.aladdin.MyPullListener;
 import com.ixxj.aladdin.R;
 import com.jingchen.pulltorefresh.PullToRefreshLayout;
 
-public class ContentActivity2 extends Activity
-{
+public class ContentActivity2 extends Activity {
     private ListView listView;
     private PullToRefreshLayout ptrl;
     private boolean isFirstIn = true;
+    public void back(View view){
+        this.finish();
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content2);
         ptrl = ((PullToRefreshLayout) findViewById(R.id.refresh_view));
@@ -36,12 +37,10 @@ public class ContentActivity2 extends Activity
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus)
-    {
+    public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         // 第一次进入自动刷新
-        if (isFirstIn)
-        {
+        if (isFirstIn) {
             ptrl.autoRefresh();
             isFirstIn = false;
         }
@@ -50,22 +49,18 @@ public class ContentActivity2 extends Activity
     /**
      * ListView初始化方法
      */
-    private void initListView()
-    {
+    private void initListView() {
         List<String> items = new ArrayList<String>();
-        for (int i = 0; i < 30; i++)
-        {
+        for (int i = 0; i < 30; i++) {
             items.add("这里是item " + i);
         }
         MyAdapter adapter = new MyAdapter(this, items);
         listView.setAdapter(adapter);
-        listView.setOnItemLongClickListener(new OnItemLongClickListener()
-        {
+        listView.setOnItemLongClickListener(new OnItemLongClickListener() {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id)
-            {
+                                           int position, long id) {
                 Toast.makeText(
                         ContentActivity2.this,
                         "LongClick on "
@@ -74,13 +69,11 @@ public class ContentActivity2 extends Activity
                 return true;
             }
         });
-        listView.setOnItemClickListener(new OnItemClickListener()
-        {
+        listView.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id)
-            {
+                                    int position, long id) {
                 Toast.makeText(ContentActivity2.this,
                         " Click on " + parent.getAdapter().getItemId(position),
                         Toast.LENGTH_SHORT).show();
